@@ -12,6 +12,7 @@ import {
   SelectLabel,
   SelectGroup,
 } from "@/components/ui/select";
+import { useState } from "react";
 
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -27,6 +28,60 @@ const info = [
 ];
 
 const Contact = () => {
+  const [form, setForm] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleServiceChange = (value: string) => {
+    setForm({ ...form, service: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
+    setError("");
+    try {
+      const res = await fetch("/api/sendEmails", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSuccess(true);
+        setForm({
+          firstname: "",
+          lastname: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
+      } else {
+        setError("Failed to send message. Please try again later.");
+      }
+    } catch {
+      setError("Failed to send message. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -37,18 +92,45 @@ const Contact = () => {
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
           <div className="xl:h-[54%] order-2 xl:order-none">
-            <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
+            <form
+              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
+              onSubmit={handleSubmit}
+            >
               <h3 className="text-4xl text-accent">Let&apos;s work together</h3>
               <p className="text-white/60">
                 Feel free to reach out using the form below.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input type="firstname" placeholder="First Name" />
-                <Input type="lastname" placeholder="Last Name" />
-                <Input type="email" placeholder="Email address" />
-                <Input type="phone" placeholder="Phone number" />
+                <Input
+                  name="firstname"
+                  type="text"
+                  placeholder="First Name"
+                  value={form.firstname}
+                  onChange={handleChange}
+                />
+                <Input
+                  name="lastname"
+                  type="text"
+                  placeholder="Last Name"
+                  value={form.lastname}
+                  onChange={handleChange}
+                />
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Email address"
+                  value={form.email}
+                  onChange={handleChange}
+                />
+                <Input
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone number"
+                  value={form.phone}
+                  onChange={handleChange}
+                />
               </div>
-              <Select>
+              <Select value={form.service} onValueChange={handleServiceChange}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
@@ -70,10 +152,25 @@ const Contact = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <Textarea placeholder="Your message" className="h-[200px] " />
-              <Button size="md" className="max-w-40">
-                Send message
+              <Textarea
+                name="message"
+                placeholder="Your message"
+                className="h-[200px] "
+                value={form.message}
+                onChange={handleChange}
+              />
+              <Button
+                size="md"
+                className="max-w-40"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Sending..." : "Send message"}
               </Button>
+              {success && (
+                <p className="text-green-500">Message sent successfully!</p>
+              )}
+              {error && <p className="text-red-500">{error}</p>}
             </form>
           </div>
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
