@@ -119,11 +119,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply text-foreground leading-loose !min-w-full;
+    @apply text-foreground leading-loose;
     background-color: var(--primary);
     color: white;
-    padding: 15px;
     font-family: var(--font-jetbrains-mono);
+    /* Remove global padding to prevent UI shift */
   }
   .h1 {
     @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
@@ -141,5 +141,13 @@
 
   .group:hover .text-outline {
     -webkit-text-stroke: 1px #00ff99;
+  }
+
+  .main-wrapper {
+    @apply text-foreground leading-loose;
+    background-color: var(--primary);
+    color: white;
+    font-family: var(--font-jetbrains-mono);
+    padding: 15px;
   }
 }

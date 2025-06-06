@@ -56,7 +56,6 @@ function SheetContent({
     <SheetPortal>
       <SheetOverlay />
       <SheetPrimitive.Content
-      
         data-slot="sheet-content"
         className={cn(
           "bg-primary data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
@@ -72,6 +71,7 @@ function SheetContent({
         )}
         {...props}
       >
+        <SheetPrimitive.Title className="sr-only">Menu</SheetPrimitive.Title>
         {children}
         <SheetPrimitive.Close className="absolute right-8 top-8 transition-opacity outline-none">
           <XIcon className="text-3xl text-accent" />
