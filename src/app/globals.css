@@ -119,7 +119,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply text-foreground leading-loose;
+    @apply text-foreground leading-loose !min-w-full;
     background-color: var(--primary);
     color: white;
     padding: 15px;

@@ -136,10 +136,18 @@ const Resume = () => {
           className="flex flex-col gap-[60px] xl:flex-row"
         >
           <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6">
-            <TabsTrigger value="experience">Experience </TabsTrigger>
-            <TabsTrigger value="education">Education</TabsTrigger>
-            <TabsTrigger value="skills">Skills</TabsTrigger>
-            <TabsTrigger value="about">About Me</TabsTrigger>
+            <TabsTrigger className="cursor-pointer " value="experience">
+              Experience
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer " value="education">
+              Education
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer " value="skills">
+              Skills
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer " value="about">
+              About Me
+            </TabsTrigger>
           </TabsList>
           <div className="min-h-[70vh] w-full">
             <TabsContent value="experience">
