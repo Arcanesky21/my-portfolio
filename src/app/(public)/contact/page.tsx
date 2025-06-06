@@ -48,10 +48,20 @@ const Contact = () => {
 
   const handleServiceChange = (value: string) => {
     setForm({ ...form, service: value });
+    setTouched((prev) => ({ ...prev, service: true }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Mark all fields as touched on submit
+    setTouched({
+      firstname: true,
+      lastname: true,
+      email: true,
+      phone: true,
+      service: true,
+      message: true,
+    });
     setLoading(true);
     setSuccess(false);
     setError("");
@@ -72,6 +82,14 @@ const Contact = () => {
           service: "",
           message: "",
         });
+        setTouched({
+          firstname: false,
+          lastname: false,
+          email: false,
+          phone: false,
+          service: false,
+          message: false,
+        });
       } else {
         setError("Failed to send message. Please try again later.");
       }
@@ -80,6 +98,40 @@ const Contact = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Validation: check if all fields are empty
+  const isFormEmpty = Object.values(form).every((v) => v === "");
+  // Validation: check if required fields are filled
+  const isFormValid =
+    form.firstname.trim() &&
+    form.lastname.trim() &&
+    form.email.trim() &&
+    form.phone.trim() &&
+    form.service.trim() &&
+    form.message.trim();
+
+  // Track touched fields for error display
+  const [touched, setTouched] = useState({
+    firstname: false,
+    lastname: false,
+    email: false,
+    phone: false,
+    service: false,
+    message: false,
+  });
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
+  // Helper for error message
+  const getError = (field: keyof typeof form) => {
+    return touched[field] && !form[field].trim()
+      ? "This field is required"
+      : "";
   };
 
   return (
@@ -101,34 +153,62 @@ const Contact = () => {
                 Feel free to reach out using the form below.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input
-                  name="firstname"
-                  type="text"
-                  placeholder="First Name"
-                  value={form.firstname}
-                  onChange={handleChange}
-                />
-                <Input
-                  name="lastname"
-                  type="text"
-                  placeholder="Last Name"
-                  value={form.lastname}
-                  onChange={handleChange}
-                />
-                <Input
-                  name="email"
-                  type="email"
-                  placeholder="Email address"
-                  value={form.email}
-                  onChange={handleChange}
-                />
-                <Input
-                  name="phone"
-                  type="tel"
-                  placeholder="Phone number"
-                  value={form.phone}
-                  onChange={handleChange}
-                />
+                <div className="flex flex-col gap-2">
+                  <Input
+                    name="firstname"
+                    type="text"
+                    placeholder="First Name"
+                    value={form.firstname}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {getError("firstname") && (
+                    <p className="text-red-500 text-xs">
+                      {getError("firstname")}
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Input
+                    name="lastname"
+                    type="text"
+                    placeholder="Last Name"
+                    value={form.lastname}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {getError("lastname") && (
+                    <p className="text-red-500 text-xs">
+                      {getError("lastname")}
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Email address"
+                    value={form.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {getError("email") && (
+                    <p className="text-red-500 text-xs">{getError("email")}</p>
+                  )}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Input
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone number"
+                    value={form.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {getError("phone") && (
+                    <p className="text-red-500 text-xs">{getError("phone")}</p>
+                  )}
+                </div>
               </div>
               <Select value={form.service} onValueChange={handleServiceChange}>
                 <SelectTrigger className="w-full">
@@ -152,18 +232,29 @@ const Contact = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
+              {getError("service") && (
+                <span className="text-red-500 text-xs">
+                  {getError("service")}
+                </span>
+              )}
               <Textarea
                 name="message"
                 placeholder="Your message"
                 className="h-[200px] "
                 value={form.message}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
+              {getError("message") && (
+                <span className="text-red-500 text-xs">
+                  {getError("message")}
+                </span>
+              )}
               <Button
                 size="md"
                 className="max-w-40"
                 type="submit"
-                disabled={loading}
+                disabled={loading || isFormEmpty || !isFormValid}
               >
                 {loading ? "Sending..." : "Send message"}
               </Button>
