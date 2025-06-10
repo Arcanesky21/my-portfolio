@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Mikarlo | Full Stack Developer",
@@ -23,6 +24,7 @@ export default function RootLayout({
           <StairTransition />
           <PageTransition>{children}</PageTransition>
         </div>
+        <Analytics />
       </body>
     </html>
   );
