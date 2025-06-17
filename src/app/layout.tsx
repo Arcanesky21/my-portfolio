@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
-import PageTransition from "@/components/PageTransition";
-import StairTransition from "@/components/StairTransition";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
@@ -21,8 +19,7 @@ export default function RootLayout({
       <body>
         <div className="main-wrapper">
           <Header />
-          <StairTransition />
-          <PageTransition>{children}</PageTransition>
+          {children}
         </div>
         <Analytics />
       </body>
