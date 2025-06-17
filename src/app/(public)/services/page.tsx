@@ -5,30 +5,30 @@ import Link from "next/link";
 const services = [
   {
     num: "01",
-    title: "Custom Web Development",
+    title: "Frontend Web Development",
     description:
-      "Crafting visually stunning, high-performance websites tailored to your brand and business goals, using the latest web technologies.",
+      "I build modern, responsive user interfaces with a focus on performance and user experience using Angular and Next.js. I create scalable, visually engaging web applications tailored to your brand and business needs.",
     href: "",
   },
   {
     num: "02",
     title: "API Design and Development",
     description:
-      "Designing and building secure, scalable APIs that power seamless integrations and robust digital experiences.",
+      "I design and build secure, scalable APIs using .NET, enabling seamless integration between systems and delivering reliable, high-performance digital experiences. My APIs are structured for maintainability, optimized for performance, and built with best practices in security and scalability.",
     href: "",
   },
   {
     num: "03",
     title: "Full Stack Development",
     description:
-      "Delivering end-to-end solutions by expertly combining front-end and back-end technologies for a unified, efficient product.",
+      "I deliver end-to-end solutions by seamlessly integrating modern frontend frameworks like Angular and Next.js with robust backend technologies such as .NET and Express.js. My approach ensures scalable, maintainable, and high-performance applications tailored to your business goals.",
     href: "",
   },
   {
     num: "04",
     title: "Performance Optimization and Refactoring",
     description:
-      "Enhancing application speed, reliability, and maintainability through code optimization, best practices, and modern refactoring techniques.",
+      "I enhance application speed, reliability, and maintainability through code optimization, best practices, and modern refactoring techniques.",
     href: "",
   },
 ];
@@ -43,39 +43,37 @@ const Services = () => {
           transition={{ duration: 0.4, ease: "easeIn" }}
           className="grid grid-cols-1 md:grid-cols-2 gap-[60px]"
         >
-          {services.map((services, index) => {
-            return (
-              <div
-                key={index}
-                className="flex-1 flex flex-col justify-center gap-6 group"
-              >
-                <div className="w-full flex justify-between items-center">
-                  <div
-                    className="text-5xl font-extrabold text-outline text-transparent
-                     group-hover:text-outline-hover transition-colors duration-500"
-                  >
-                    {services.num}
-                  </div>
-                  <Link
-                    href={services.href}
-                    className="w-[70px] h-[70px] rounded-full
-                  bg-white group:hover:bg-accent transition-all duration-500 flex justify-center
-                  items-center hover:-rotate-45"
-                  >
-                    <BsArrowDownRight className="text-primary text-3xl" />
-                  </Link>
-                </div>
-                <h2
-                  className="text-[42px] font-bold leading-none text-white group-hover:text-accent
-                transition-all duration-500"
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="flex flex-col justify-between h-full p-6 bg-[#1e1e1e] rounded-2xl border border-white/10 group hover:border-accent transition-all duration-500"
+            >
+              <div className="flex justify-between items-center mb-4">
+                <div
+                  className="text-5xl font-extrabold text-outline text-transparent
+          group-hover:text-outline-hover transition-colors duration-500"
                 >
-                  {services.title}
-                </h2>
-                <p className="text-white/60">{services.description}</p>
-                <div className="border-b border-white/20 w-full"></div>
+                  {service.num}
+                </div>
+                <Link
+                  href={service.href}
+                  className="w-[60px] h-[60px] rounded-full
+          bg-white group-hover:bg-accent transition-all duration-500 flex justify-center
+          items-center hover:-rotate-45"
+                >
+                  <BsArrowDownRight className="text-primary text-2xl" />
+                </Link>
               </div>
-            );
-          })}
+              <h2
+                className="text-[32px] font-bold text-white group-hover:text-accent
+        transition-all duration-500 mb-4"
+              >
+                {service.title}
+              </h2>
+              <p className="text-white/70 mb-6">{service.description}</p>
+              <div className="border-b border-white/10 w-full mt-auto" />
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
