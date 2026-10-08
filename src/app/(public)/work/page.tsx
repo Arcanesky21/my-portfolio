@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { BsArrowUpRight, BsGithub } from "react-icons/bs";
-import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Tooltip,
@@ -33,13 +32,8 @@ const projects = [
     category: "full stack",
     title: "iNeedALinkJA",
     description:
-      "A two-sided marketplace I founded and operate through Arkane Technologies, connecting Jamaican homeowners with skilled tradespeople. Contractors verify their phone number with Twilio Verify (WhatsApp, with SMS fallback) before they can bid, so every job connects a customer with a real, reachable contractor.",
-    stack: [
-      { name: "Angular" },
-      { name: "Spring Boot" },
-      { name: "Twilio Verify" },
-      { name: "Postgres" },
-    ],
+      "A two-sided marketplace I founded and operate through Arkane Technologies, connecting Jamaican homeowners with skilled tradespeople. Contractors verify their phone number (WhatsApp, with SMS fallback) before they can bid, so every job connects a customer with a real, reachable contractor.",
+    stack: [{ name: "Angular" }, { name: "Spring Boot" }, { name: "Postgres" }],
     image: "/assets/work/ineedalinkja.jpg",
     live: "https://dev.ineedalinkja.com",
     github: "",
@@ -86,7 +80,11 @@ const Work = () => {
               <div className="border border-white/20"></div>
               <div className="flex items-center  gap-4">
                 {projectsData.live && (
-                  <Link href={projectsData.live} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href={projectsData.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <TooltipProvider delayDuration={100}>
                       <Tooltip>
                         <TooltipTrigger className="w-[70px] cursor-pointer h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
@@ -100,7 +98,11 @@ const Work = () => {
                   </Link>
                 )}
                 {projectsData.github && (
-                  <Link href={projectsData.github} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href={projectsData.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <TooltipProvider delayDuration={100}>
                       <Tooltip>
                         <TooltipTrigger className="w-[70px] cursor-pointer h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
