@@ -4,53 +4,43 @@ import Image from "next/image";
 
 const Photo = () => {
   return (
-    <div className="w-full h-full relative">
+    <div className="relative h-full w-full">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 0.4, ease: "easeIn" }}
-        className="w-full h-full relative flex items-center justify-center"
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="relative flex h-full w-full items-center justify-center"
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.4, duration: 0.4, ease: "easeInOut" }}
-          className="w-[290px] h-[290px] xl:w-[498px] xl:h-[498px] absolute"
-        >
+        <div className="absolute size-[290px] xl:size-[498px]">
           <Image
             src="/assets/Me.jpeg"
             priority
-            quality={100}
+            quality={90}
             alt="Mikarlo Francis"
             fill
-            className="object-cover object-top rounded-full"
+            sizes="(min-width: 1280px) 498px, 290px"
+            className="rounded-full object-cover object-top"
           />
-        </motion.div>
+        </div>
 
+        {/* Slow, continuous ring. Motion is disabled for reduced-motion visitors by MotionProvider. */}
         <motion.svg
-          className="w-[300px] xl:w-[506px] h-[300px] xl:h-[506px]"
+          className="h-[300px] w-[300px] text-primary xl:h-[506px] xl:w-[506px]"
           fill="transparent"
           viewBox="0 0 506 506"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         >
-          <motion.circle
+          <circle
             cx="253"
             cy="253"
             r="270"
-            stroke="#00ff99"
-            strokeWidth="4"
-            strokeLinejoin="round"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeDasharray="120 40 60 40 200 60"
             strokeLinecap="round"
-            initial={{ strokeDasharray: "24 10 0 0" }}
-            animate={{
-              strokeDasharray: ["15 120 25 25", "16 25 92 72", "4 250 22 22"],
-              rotate: [120, 360],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
           />
         </motion.svg>
       </motion.div>

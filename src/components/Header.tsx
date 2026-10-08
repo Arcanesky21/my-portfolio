@@ -5,20 +5,20 @@ import MobileNav from "./MobileNav";
 
 const Header = () => {
   return (
-    <header className="py-8 xl:py-12 text-white ">
+    <header className="py-6 xl:py-10 text-foreground">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link href="/">
-          <h1 className="text-4xl font-semibold">
-            Mikarlo <span className="text-accent">.</span>
-          </h1>
+        <Link href="/" className="rounded-md">
+          <span className="text-3xl font-bold tracking-tight">
+            Mikarlo<span className="text-primary">.</span>
+          </span>
         </Link>
         {/* Desktop nav and hire me button */}
         <div className="hidden xl:flex items-center gap-8">
           <Nav />
-          <Link href="/contact">
-            <Button className="">Hire me</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/contact">Hire me</Link>
+          </Button>
         </div>
 
         {/* Mobile nav */}

@@ -148,18 +148,21 @@ const Contact = () => {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 2.4, duration: 0.4, ease: "easeIn" }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className="py-6"
     >
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
           <div className="xl:h-[54%] order-2 xl:order-none">
             <form
-              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
+              className="flex flex-col gap-6 rounded-xl border border-border bg-card p-6 sm:p-10"
               onSubmit={handleSubmit}
+              noValidate
             >
-              <h3 className="text-4xl text-accent">Let&apos;s work together</h3>
-              <p className="text-white/60">
+              <h3 className="text-3xl font-bold text-primary sm:text-4xl">
+                Let&apos;s work together
+              </h3>
+              <p className="text-muted-foreground">
                 Feel free to reach out using the form below.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -168,12 +171,14 @@ const Contact = () => {
                     name="firstname"
                     type="text"
                     placeholder="First Name"
+                    aria-label="First name"
+                    aria-invalid={!!getError("firstname")}
                     value={form.firstname}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   {getError("firstname") && (
-                    <p className="text-red-500 text-xs">
+                    <p className="text-destructive text-sm">
                       {getError("firstname")}
                     </p>
                   )}
@@ -183,12 +188,14 @@ const Contact = () => {
                     name="lastname"
                     type="text"
                     placeholder="Last Name"
+                    aria-label="Last name"
+                    aria-invalid={!!getError("lastname")}
                     value={form.lastname}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   {getError("lastname") && (
-                    <p className="text-red-500 text-xs">
+                    <p className="text-destructive text-sm">
                       {getError("lastname")}
                     </p>
                   )}
@@ -198,12 +205,14 @@ const Contact = () => {
                     name="email"
                     type="email"
                     placeholder="Email address"
+                    aria-label="Email address"
+                    aria-invalid={!!getError("email")}
                     value={form.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   {getError("email") && (
-                    <p className="text-red-500 text-xs">{getError("email")}</p>
+                    <p className="text-destructive text-sm">{getError("email")}</p>
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
@@ -211,17 +220,23 @@ const Contact = () => {
                     name="phone"
                     type="tel"
                     placeholder="Phone number"
+                    aria-label="Phone number"
+                    aria-invalid={!!getError("phone")}
                     value={form.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   {getError("phone") && (
-                    <p className="text-red-500 text-xs">{getError("phone")}</p>
+                    <p className="text-destructive text-sm">{getError("phone")}</p>
                   )}
                 </div>
               </div>
               <Select value={form.service} onValueChange={handleServiceChange}>
-                <SelectTrigger className="w-full">
+                <SelectTrigger
+                  className="w-full"
+                  aria-label="Service"
+                  aria-invalid={!!getError("service")}
+                >
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
@@ -243,48 +258,56 @@ const Contact = () => {
                 </SelectContent>
               </Select>
               {getError("service") && (
-                <span className="text-red-500 text-xs">
+                <span className="text-destructive text-sm">
                   {getError("service")}
                 </span>
               )}
               <Textarea
                 name="message"
                 placeholder="Your message"
-                className="h-[200px] "
+                aria-label="Your message"
+                aria-invalid={!!getError("message")}
+                className="h-[200px]"
                 value={form.message}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
               {getError("message") && (
-                <span className="text-red-500 text-xs">
+                <span className="text-destructive text-sm">
                   {getError("message")}
                 </span>
               )}
               <Button
                 size="md"
-                className="max-w-40"
+                className="w-full sm:w-auto sm:min-w-40"
                 type="submit"
                 disabled={loading || isFormEmpty || !isFormValid}
               >
                 {loading ? "Sending..." : "Send message"}
               </Button>
               {success && (
-                <p className="text-green-500">Message sent successfully!</p>
+                <p role="status" className="text-success">
+                  Message sent successfully!
+                </p>
               )}
-              {error && <p className="text-red-500">{error}</p>}
+              {error && (
+                <p role="alert" className="text-destructive">
+                  {error}
+                </p>
+              )}
             </form>
           </div>
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
             <ul className="flex flex-col gap-10">
               {info.map((item, index) => {
                 return (
-                  <li key={index} className="flex items-center gap-6">
-                    <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex justify-center items-center ">
-                      <div className="text-[28px]">{item.icon}</div>
+                  <li key={index} className="flex items-center gap-5">
+                    <div className="flex size-14 items-center justify-center rounded-lg border border-border bg-card text-primary xl:size-16">
+                      <div className="text-2xl">{item.icon}</div>
                     </div>
                     <div className="flex-1">
-                      <p className="text-white/60">{item.title}</p>
-                      <p className="text-xl">{item.description}</p>
+                      <p className="text-sm text-muted-foreground">{item.title}</p>
+                      <p className="text-lg font-medium">{item.description}</p>
                     </div>
                   </li>
                 );
