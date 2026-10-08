@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 export const metadata: Metadata = {
   title: "Mikarlo | Full Stack Developer",
   description:
-    "Portfolio of Mikarlo Francis, a full stack developer specializing in modern web development, API design, and scalable digital solutions.",
+    "Portfolio of Mikarlo Francis, a full stack developer and founder of Arkane Technologies, the Jamaican business behind iNeedALinkJA.",
 };
 
 export default function RootLayout({

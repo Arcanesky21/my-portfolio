@@ -14,7 +14,12 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaBuilding,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const info = [
@@ -25,6 +30,11 @@ const info = [
     description: "mikarlofrancis@gmail.com",
   },
   { icon: <FaMapMarkerAlt />, title: "Address", description: "Jamaica" },
+  {
+    icon: <FaBuilding />,
+    title: "Business",
+    description: "Arkane Technologies (iNeedALinkJA)",
+  },
 ];
 
 const Contact = () => {

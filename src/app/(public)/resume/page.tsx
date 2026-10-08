@@ -54,8 +54,13 @@ const experience = {
   icon: "",
   title: "My Experience",
   description:
-    "Currently working as a Programmer Analyst at Sagicor Group, I specialize in developing and maintaining enterprise-level applications. My role involves collaborating with cross-functional teams to deliver robust solutions that drive business success.",
+    "I am the founder and owner of Arkane Technologies, the Jamaican business that operates iNeedALinkJA, a marketplace connecting homeowners with skilled tradespeople. I also work as a Programmer Analyst at Sagicor Group, developing and maintaining enterprise-level applications and collaborating with cross-functional teams to deliver robust solutions.",
   items: [
+    {
+      company: "Arkane Technologies (iNeedALinkJA)",
+      position: "Founder & Lead Developer",
+      duration: "2026 - Present",
+    },
     {
       company: "Sagicor Group",
       position: "Programmer Analyst",
