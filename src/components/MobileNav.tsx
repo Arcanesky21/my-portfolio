@@ -3,57 +3,47 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu } from "lucide-react";
+
+const links = [
+  { name: "home", href: "/" },
+  { name: "services", href: "/services" },
+  { name: "resume", href: "/resume" },
+  { name: "work", href: "/work" },
+  { name: "contact", href: "/contact" },
+];
+
 const MobileNav = () => {
   const pathname = usePathname();
 
-  const links = [
-    {
-      name: "home",
-      href: "/",
-    },
-    {
-      name: "services",
-      href: "/services",
-    },
-    {
-      name: "resume",
-      href: "/resume",
-    },
-    {
-      name: "work",
-      href: "/work",
-    },
-    {
-      name: "contact",
-      href: "/contact",
-    },
-  ];
-
   return (
     <Sheet>
-      <SheetTrigger className="xl:hidden flex justify-center items-center">
-        <Menu className="text-[32px] text-accent" />
+      <SheetTrigger
+        aria-label="Open menu"
+        className="flex size-11 items-center justify-center rounded-lg text-primary"
+      >
+        <Menu className="size-7" />
       </SheetTrigger>
       <SheetContent side="right" className="flex flex-col">
-        <div className="mt-32 mb-40 text-center text-2xl">
-          {" "}
-          <Link href="/" className="block mb-8">
-            <h1 className="text-4xl font-semibold">
-              Mikarlo <span className="text-accent">.</span>
-            </h1>
+        <div className="mt-24 mb-16 text-center">
+          <Link href="/" className="inline-block">
+            <span className="text-4xl font-bold tracking-tight">
+              Mikarlo<span className="text-primary">.</span>
+            </span>
           </Link>
         </div>
-        <nav className="flex flex-col gap-8 jjustify-center items-center">
-          {links.map((link, index) => {
+        <nav aria-label="Mobile" className="flex flex-col items-center gap-2">
+          {links.map((link) => {
+            const isActive = link.href === pathname;
             return (
               <Link
                 href={link.href}
-                key={index}
-                className={`text-xl capitalize hover:text-accent transition-all border-b-2 border-accent ${
-                  link.href === pathname
-                    ? "text-accent border-b-2 border-accent"
-                    : "hover:text-accent"
-                } transition-all`}
+                key={link.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`flex min-h-11 w-full max-w-xs items-center justify-center rounded-lg text-xl capitalize transition-colors ${
+                  isActive
+                    ? "bg-primary text-primary-foreground font-bold"
+                    : "text-foreground hover:bg-muted"
+                }`}
               >
                 {link.name}
               </Link>

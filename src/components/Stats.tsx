@@ -18,26 +18,21 @@ const stats = [
 
 const Stats = () => {
   return (
-    <section>
+    <section aria-label="Highlights" className="border-y border-border py-8">
       <div className="container mx-auto">
-        <div className="flex flex-wrap gap-6 max-w-[80vw] mx-auto xl:max-w-none">
-          {stats.map((stat, index) => {
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          {stats.map((stat) => {
             return (
               <div
-                key={index}
-                className="flex  flex-1 items-center justify-center gap-4 text-center"
+                key={stat.title}
+                className="flex items-center justify-center gap-4 text-center sm:justify-start sm:text-left"
               >
                 <CountUp
                   end={stat.number}
-                  duration={5}
-                  delay={2}
-                  className="text-4xl xl:text-6xl font-extrabold"
+                  duration={1.2}
+                  className="text-4xl font-bold text-primary xl:text-5xl"
                 />
-                <p
-                  className={`${
-                    stat.title.length < 15 ? "max-w-[100px]" : "max-w-[150px]"
-                  } leading-snug text-white/80`}
-                >
+                <p className="max-w-[140px] leading-snug text-muted-foreground">
                   {stat.title}
                 </p>
               </div>

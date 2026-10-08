@@ -13,17 +13,20 @@ const links = [
 const Nav = () => {
   const pathname = usePathname();
 
-  console.log(pathname);
   return (
-    <nav className="flex gap-8">
-      {links.map((link, index) => {
+    <nav aria-label="Main" className="flex gap-8">
+      {links.map((link) => {
+        const isActive = link.path === pathname;
         return (
           <Link
             href={link.path}
-            key={index}
-            className={`${
-              link.path === pathname && "text-accent border-b-2 border-accent"
-            } capitalize font-medium hover:text-accent transition-all`}
+            key={link.path}
+            aria-current={isActive ? "page" : undefined}
+            className={`capitalize font-medium py-1 border-b-2 transition-colors ${
+              isActive
+                ? "text-primary border-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
           >
             {link.name}
           </Link>
