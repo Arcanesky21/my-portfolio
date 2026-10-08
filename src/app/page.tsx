@@ -28,6 +28,19 @@ export default function Home() {
               SQL—building scalable, high-performance applications tailored to
               user needs.
             </p>
+            <p className="mb-9 text-white/80">
+              Founder of <span className="text-accent">Arkane Technologies</span>,
+              the Jamaican business behind{" "}
+              <a
+                href="https://dev.ineedalinkja.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent underline underline-offset-4"
+              >
+                iNeedALinkJA
+              </a>
+              , a marketplace connecting homeowners with skilled tradespeople.
+            </p>
             <div className="flex flex-col xl:flex-row items-center gap-6">
               <Social
                 containerStyles="flex gap-5"

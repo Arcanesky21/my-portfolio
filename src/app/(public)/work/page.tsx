@@ -28,6 +28,17 @@ const projects = [
     live: "",
     github: "https://github.com/Arcanesky21/my-portfolio",
   },
+  {
+    num: "02",
+    category: "full stack",
+    title: "iNeedALinkJA",
+    description:
+      "A two-sided marketplace I founded and operate through Arkane Technologies, connecting Jamaican homeowners with skilled tradespeople. Contractors verify their phone number (WhatsApp, with SMS fallback) before they can bid, so every job connects a customer with a real, reachable contractor.",
+    stack: [{ name: "Angular" }, { name: "Spring Boot" }, { name: "Postgres" }],
+    image: "/assets/work/ineedalinkja.jpg",
+    live: "https://dev.ineedalinkja.com",
+    github: "",
+  },
 ];
 
 const Work = () => {
@@ -69,30 +80,42 @@ const Work = () => {
               </ul>
               <div className="border border-white/20"></div>
               <div className="flex items-center  gap-4">
-                <Link href={projectsData.live} target="_blank">
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] cursor-pointer h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>View this project live</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
-                <Link href={projectsData.github} target="_blank">
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] cursor-pointer h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsGithub className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>View this project on GitHub</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
+                {projectsData.live && (
+                  <Link
+                    href={projectsData.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] cursor-pointer h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                          <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>View this project live</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                )}
+                {projectsData.github && (
+                  <Link
+                    href={projectsData.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] cursor-pointer h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                          <BsGithub className="text-white text-3xl group-hover:text-accent" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>View this project on GitHub</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -110,7 +133,7 @@ const Work = () => {
                       <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
                       <div className="relative w-full h-full">
                         <Image
-                          src={projectsData.image}
+                          src={project.image}
                           alt={project.title}
                           fill
                           priority
